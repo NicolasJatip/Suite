@@ -3,8 +3,9 @@ services:
     build:
       context: ./server
     image: suite-transcrip:local
-    container_name: suite
     restart: unless-stopped
+    # Sin root: el proceso corre con este UID/GID, que debe ser el duenio de ./data en el host
+    user: "${SUITE_UID:-1000}:${SUITE_GID:-1000}"
     environment:
       APP_NAME: ${SUITE_APP_NAME:-Suite}
       PUBLIC_URL: ${SUITE_PUBLIC_URL:-http://localhost:8000}

@@ -54,10 +54,14 @@ cp .env.example .env
 python -c "import secrets; print(secrets.token_urlsafe(48))"
 #    (o: openssl rand -base64 48)
 
-# 3. Levantar
+# 3. Crear la carpeta de datos con tu usuario (el contenedor corre sin root)
+mkdir -p data
+#    si tu UID no es 1000, ajustá SUITE_UID / SUITE_GID en .env (id -u / id -g)
+
+# 4. Levantar
 docker compose up -d --build
 
-# 4. Abrir http://localhost:8000 y entrar con SUITE_ADMIN_USER / SUITE_ADMIN_PASSWORD
+# 5. Abrir http://localhost:8000 y entrar con SUITE_ADMIN_USER / SUITE_ADMIN_PASSWORD
 ```
 
 La primera transcripción tarda más: descarga el modelo whisper y lo deja cacheado en `./data/models`.
@@ -70,6 +74,7 @@ La primera transcripción tarda más: descarga el modelo whisper y lo deja cache
 | `SUITE_SESSION_SECRET` | ✅ | — | Firma la cookie de sesión. Cadena larga y aleatoria |
 | `SUITE_PUBLIC_URL` | recomendada | `http://localhost:8000` | URL con la que se llega al servidor. **Se inyecta en la extensión** al descargarla |
 | `SUITE_PORT` | | `8000` | Puerto publicado en el host |
+| `SUITE_UID` / `SUITE_GID` | | `1000` | Usuario con el que corre el contenedor (sin root); dueño de `./data` |
 | `SUITE_ADMIN_USER` | | `admin` | Usuario del login |
 | `SUITE_APP_NAME` | | `Suite` | Nombre en la interfaz |
 | `SUITE_MODEL` | | `small` | Modelo whisper: `tiny`, `base`, `small`, `medium`, `large-v3` |

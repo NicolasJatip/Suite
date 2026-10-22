@@ -17,7 +17,12 @@ RUN pip install -r requirements.txt
 
 COPY app ./app
 
-RUN mkdir -p /data/uploads /data/chunks /data/outputs /data/tmp /data/markitdown/uploads /data/markitdown/outputs
+RUN useradd --uid 1000 --create-home --shell /usr/sbin/nologin suite \
+    && mkdir -p /data/uploads /data/chunks /data/outputs /data/tmp /data/markitdown/uploads /data/markitdown/outputs \
+    && chown -R suite:suite /data /app
+
+# Corre sin root. En compose se puede pisar con SUITE_UID/SUITE_GID para que coincida con el duenio de ./data
+USER suite
 
 EXPOSE 8000
 
