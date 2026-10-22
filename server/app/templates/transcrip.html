@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="workspace">
+  <div class="tool-header">
+    <div>
+      <p class="eyebrow">Transcrip</p>
+      <h1>Transcripción local de video</h1>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <a id="ext-download-btn" class="secondary hidden" href="/extension/transcrip-recorder.zip" download="transcrip-recorder.zip" title="Instalación descomprimida (ver pasos abajo)">Extensión Chrome (.zip)</a>
+      <a class="secondary" href="/home">Volver</a>
+    </div>
+  </div>
+
+  <details id="ext-install" class="panel hidden" style="margin-bottom:16px;">
+    <summary><strong>Cómo instalar la extensión Chrome</strong></summary>
+    <ol>
+      <li>Descargá <a href="/extension/transcrip-recorder.zip">transcrip-recorder.zip</a> y descomprimilo en una carpeta fija (no la borres: Chrome la usa).</li>
+      <li>Abrí <code>chrome://extensions</code> y activá <strong>Modo de desarrollador</strong> (arriba a la derecha).</li>
+      <li>Tocá <strong>Cargar descomprimida</strong> y elegí la carpeta <code>transcrip-recorder</code> (la que tiene <code>manifest.json</code>).</li>
+      <li>Fijala en la barra y entrá a la suite con tu usuario. Para actualizar: bajá el zip nuevo, reemplazá la carpeta y tocá ↻ en la extensión.</li>
+    </ol>
+    <p class="muted-text">Chrome no permite instalar .crx bajados fuera de la Web Store (CRX_REQUIRED_PROOF_MISSING); por eso va descomprimida. Si tenías la versión .crx vieja, quitala primero.</p>
+  </details>
+
+  <div class="tool-layout">
+    <section class="panel">
+      <h2>Nuevo video</h2>
+      <form id="upload-form" class="stack">
+        <label>
+          Archivo de video
+          <input id="video-file" type="file" accept=".mp4,.avi,.mov,.mkv,.webm,.m4v" required>
+        </label>
+        <button class="primary" type="submit">Subir y transcribir</button>
+      </form>
+      <div id="upload-state" class="upload-state hidden">
+        <div class="progress-line">
+          <span id="upload-label">Preparando</span>
+          <strong id="upload-percent">0%</strong>
+        </div>
+        <progress id="upload-progress" max="100" value="0"></progress>
+      </div>
+      <p class="muted-text">Formatos: MP4, AVI, MOV, MKV, WEBM y M4V. Tamaño máximo: {{ settings.max_upload_gb }} GB.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Cola e historial</h2>
+      <div id="jobs" class="jobs"></div>
+    </section>
+  </div>
+</section>
+
+<script>
+  window.TRANSCRIP_CONFIG = {
+    chunkSize: {{ settings.chunk_size_mb }} * 1024 * 1024
+  };
+</script>
+<script>window.SUITE_GOOGLE_DOCS = {{ "true" if settings.google_docs_enabled else "false" }};</script>
+<script src="/static/transcrip.js?v=20260612-ext-detect"></script>
+{% endblock %}

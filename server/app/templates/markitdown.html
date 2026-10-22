@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="workspace">
+  <div class="tool-header">
+    <div>
+      <p class="eyebrow">MarkItDown</p>
+      <h1>Archivos a Markdown</h1>
+    </div>
+    <a class="secondary" href="/home">Volver</a>
+  </div>
+
+  <div class="tool-layout">
+    <section class="panel">
+      <h2>Nuevo archivo</h2>
+      <form id="markitdown-form" class="stack">
+        <label id="drop-zone" class="drop-zone">
+          <span class="drop-title">Arrastra un archivo aca</span>
+          <span class="drop-copy">o buscalo desde tu equipo</span>
+          <input
+            id="markitdown-file"
+            type="file"
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.html,.htm,.csv,.tsv,.json,.xml,.txt,.md,.rtf,.odt,.ods,.odp,.jpg,.jpeg,.png,.gif,.bmp,.tif,.tiff,.webp,.mp3,.wav,.m4a,.aac,.flac,.ogg,.opus,.zip,.epub"
+            required
+          >
+        </label>
+        <button class="primary" type="submit">Convertir a Markdown</button>
+      </form>
+      <div id="markitdown-state" class="upload-state hidden">
+        <div class="progress-line">
+          <span id="markitdown-label">Preparando</span>
+          <strong id="markitdown-percent">0%</strong>
+        </div>
+        <progress id="markitdown-progress" max="100" value="0"></progress>
+      </div>
+      <p class="muted-text">Formatos: PDF, Office, HTML, CSV, JSON, imagenes, audio, ZIP y EPUB. Tamano maximo: {{ settings.markitdown_max_upload_mb }} MB.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Conversiones</h2>
+      <div id="markitdown-jobs" class="jobs"></div>
+    </section>
+  </div>
+</section>
+
+<script src="/static/markitdown.js?v=20260612-markitdown"></script>
+{% endblock %}

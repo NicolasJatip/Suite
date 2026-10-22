@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body_class %}login-page aurora-page{% endblock %}
+
+{% block content %}
+<section class="login-shell">
+  <div class="login-visual">
+    <p class="eyebrow">Workspace privado</p>
+    <h1>Tu suite local de automatizaciones <span class="keep-together">y herramientas.</span></h1>
+    <p class="lead">Un portal oscuro, rapido y hecho para centralizar servicios propios sin depender de terceros.</p>
+
+    <div class="login-app-preview" aria-hidden="true">
+      <div class="mini-app transcrip-mini">
+        <span class="mini-logo play-logo"></span>
+        <span>Transcrip</span>
+      </div>
+      <div class="mini-app docs-mini">
+        <span class="mini-logo docs-logo"></span>
+        <span>Docs</span>
+      </div>
+      <div class="mini-app drive-mini">
+        <span class="mini-logo drive-logo"></span>
+        <span>Drive</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-panel">
+    <div class="panel-glow"></div>
+    <p class="eyebrow">Acceso seguro</p>
+    <h2>Entrar a Suite</h2>
+    <p class="panel-copy">Gestiona tus herramientas internas desde un solo lugar.</p>
+    {% if error %}
+    <div class="alert">{{ error }}</div>
+    {% endif %}
+    <form class="stack" action="/login" method="post">
+      <label>
+        Usuario
+        <input name="username" autocomplete="username" placeholder="admin" required autofocus>
+      </label>
+      <label>
+        Clave
+        <input name="password" type="password" autocomplete="current-password" placeholder="Tu clave" required>
+      </label>
+      <button class="primary" type="submit">Ingresar</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

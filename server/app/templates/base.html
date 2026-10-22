@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ settings.app_name }}</title>
+    <link rel="icon" href="/static/favicon.svg?v=20260612-suite-icon" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/styles.css?v=20260612-ext-detect">
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    <header class="topbar">
+      <a class="brand" href="/home">
+        <span class="brand-mark">S</span>
+        <span>{{ settings.app_name }}</span>
+      </a>
+      {% if user %}
+      <nav class="topnav">
+        <a href="/home">Home</a>
+        <a href="/transcrip">Transcrip</a>
+        <a href="/markitdown">MarkItDown</a>
+        <form action="/logout" method="post">
+          <button class="ghost" type="submit">Salir</button>
+        </form>
+      </nav>
+      {% endif %}
+    </header>
+    <main class="page">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

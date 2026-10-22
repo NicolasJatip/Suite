@@ -1,0 +1,10 @@
+.env
+data/
+*.pem
+*.crx
+*service-account*.json
+*credentials*.json
+__pycache__/
+*.pyc
+.venv/
+*.sqlite3

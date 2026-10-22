@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block body_class %}home-page aurora-page{% endblock %}
+
+{% block content %}
+<section class="suite-hero">
+  <div>
+    <p class="eyebrow">{{ settings.public_host }}</p>
+    <h1>Suite</h1>
+    <p class="lead">Un launcher privado para tus herramientas, servicios y automatizaciones locales.</p>
+  </div>
+  <div class="suite-status" aria-label="Estado de la suite">
+    <span class="pulse-dot"></span>
+    Servicios locales activos
+  </div>
+</section>
+
+<section class="service-grid">
+  <a class="service-card active" href="/transcrip">
+    <span class="service-icon transcrip-logo" aria-hidden="true">
+      <span class="play-triangle"></span>
+      <span class="caption-line line-one"></span>
+      <span class="caption-line line-two"></span>
+    </span>
+    <div>
+      <h2>Transcrip</h2>
+      <p>Subi videos grandes y descarga transcripciones TXT y SRT.</p>
+    </div>
+    <span class="card-arrow">Abrir</span>
+  </a>
+
+  <a class="service-card active" href="/markitdown">
+    <span class="service-icon markitdown-logo">M</span>
+    <div>
+      <h2>MarkItDown</h2>
+      <p>Converti archivos a Markdown listo para descargar.</p>
+    </div>
+    <span class="card-arrow">Abrir</span>
+  </a>
+
+</section>
+{% endblock %}
